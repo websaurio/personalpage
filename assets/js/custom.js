@@ -11,7 +11,7 @@
 
 	$(document).ready(function() {
 
-    
+
 		/* ---------------------------------------------- /*
 		 * Initialization General Scripts for all pages
 		/* ---------------------------------------------- */
@@ -29,7 +29,7 @@
 
 		buildHomeSection(homeSection);
 		navbarAnimation(navbar, homeSection, navHeight);
-		
+
 		$(window).resize(function() {
 			var width = Math.max($(window).width(), window.innerWidth);
 			buildHomeSection(homeSection);
@@ -54,13 +54,13 @@
 					homeSection.height($(window).height() * 0.95);
 				}
 			}
-	     	}	 
+	     	}
 		}
 		 /* ---------------------------------------------- /*
 		 * Fix Touch Hover
-		/* ----------------------------------------------*/	
+		/* ----------------------------------------------*/
 	     $('body').bind('touchstart', function() {});
- 
+
 
 		/* ---------------------------------------------- /*
 		 * Home section effects
@@ -74,7 +74,7 @@
 						homeSection.css('top', (topScroll * 0));
 					}
 			}}		 else {
-			
+
 				if (homeSection.length > 0) {
 					var homeSHeight = homeSection.height();
 					var topScroll = $(document).scrollTop();
@@ -82,8 +82,8 @@
 						homeSection.css('top', (topScroll * 0.35));
 					}
 				}
-		 } 
-		} 
+		 }
+		}
 
 		/* ---------------------------------------------- /*
 		 * Skrollr
@@ -95,7 +95,7 @@
 			forceHeight: false,
 			smoothScrolling: true
 		});
-		}			
+		}
 		};
 		/* ---------------------------------------------- /*
 		 * Transparent navbar animation
@@ -121,7 +121,7 @@
 				$(this).collapse('hide');
 			}
 		});
-		
+
 
 		/* ---------------------------------------------- /*
 		 * Testimonials, Post sliders
@@ -179,7 +179,7 @@
 			});
 
 		});
-		
+
 
 		/* ---------------------------------------------- /*
 		 * WOW Animation When You Scroll
@@ -190,7 +190,7 @@
 			});
 			wow.init();
 
-        
+
 		/* ---------------------------------------------- /*
 		 * Scroll Animation
 		/* ---------------------------------------------- */
@@ -202,7 +202,7 @@
 			}, 1000);
 			e.preventDefault();
 		});
-		
+
 		/* ---------------------------------------------- /*
 		 * Portfolio
 		/* ---------------------------------------------- */
@@ -214,26 +214,72 @@
 			worksgrid_mode = 'fitRows';
 		}
 
+    var btnLoadMore = $('#load-more'), skrollrBody = $('#skrollr-body');
+    var hideAfter = worksgrid.data('hide-after') - 1;
+    var steps  = worksgrid.data('steps');
+
+    function toggleLoadMoreButton(totalFilteredElements) {
+      btnLoadMore[totalFilteredElements <= 0 ? 'hide' : 'show']();
+    }
+
+    function applyFilter(totalFilteredElements) {
+      worksgrid.isotope({
+        filter: ':not(.work-item-hidden, .not-related)',
+        animationOptions: {
+          duration: 750,
+          easing: 'linear',
+          queue: false
+        }
+      });
+
+      toggleLoadMoreButton(totalFilteredElements);
+    }
+
+    btnLoadMore.on('click', function() {
+      var children = worksgrid.find('.work-item-hidden');
+      children.filter(':lt('+steps+')').removeClass('work-item-hidden');
+
+      applyFilter(children.length - steps)
+    });
+
+    function layoutComplete() {
+        $('#smooth-scroll').height(skrollrBody.height());
+    }
+
+    worksgrid.after(btnLoadMore)
+      .on('layoutComplete', layoutComplete);
+
 		worksgrid.imagesLoaded(function() {
+      var children = worksgrid.children(':gt('+hideAfter+')').addClass('work-item-hidden');
+
 			worksgrid.isotope({
 				layoutMode: worksgrid_mode,
 				itemSelector: '.work-item',
+        filter: ':not(.work-item-hidden, .not-related)'
 			});
+
+      toggleLoadMoreButton(children.length);
 		});
+    layoutComplete();
 
 		$('#filters a').click(function() {
 			$('#filters .current').removeClass('current');
 			$(this).addClass('current');
 			var selector = $(this).attr('data-filter');
 
-			worksgrid.isotope({
-				filter: selector,
-				animationOptions: {
-					duration: 750,
-					easing: 'linear',
-					queue: false
-				}
-			});
+      var children = worksgrid.find('li')
+        // This prevents isotope to filter elements we don't want
+        .removeClass('work-item-hidden not-related')
+        .filter(':not('+selector+')')
+        .addClass('not-related')
+        .end()
+
+        // Add a work-item-hidden class to every element in selector
+        .filter(selector)
+        .filter(':gt('+hideAfter+')')
+        .addClass('work-item-hidden');
+
+			applyFilter(children.length);
 
 			return false;
 		});
