@@ -242,10 +242,12 @@
       applyFilter(children.length - steps)
     });
 
-    worksgrid.after(btnLoadMore)
-      .on('layoutComplete', function() {
+    function layoutComplete() {
         $('#smooth-scroll').height(skrollrBody.height());
-      });
+    }
+
+    worksgrid.after(btnLoadMore)
+      .on('layoutComplete', layoutComplete);
 
 		worksgrid.imagesLoaded(function() {
       var children = worksgrid.children(':gt('+hideAfter+')').addClass('work-item-hidden');
@@ -258,6 +260,7 @@
 
       toggleLoadMoreButton(children.length);
 		});
+    layoutComplete();
 
 		$('#filters a').click(function() {
 			$('#filters .current').removeClass('current');
