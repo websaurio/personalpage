@@ -243,10 +243,8 @@
     });
 
     worksgrid.after(btnLoadMore)
-      // As long as there is not any other element after #skroller-body
-      // This will fix the blank space at the end
       .on('layoutComplete', function() {
-        skrollrBody.next().height(skrollrBody.height());
+        $('#smooth-scroll').height(skrollrBody.height());
       });
 
 		worksgrid.imagesLoaded(function() {
