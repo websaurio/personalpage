@@ -21,8 +21,6 @@ body {
 	width: 100%;
 }
 
-#skrollr-body {}
-
 html {
 	background: #fff;
 	width: 100%;
@@ -172,7 +170,7 @@ a,
 
 .btn.btn-w {
 	background: rgba(255, 255, 255, .8);
-	color: #111;
+	color: #3b3d43;
 }
 
 .btn.btn-w:hover,
@@ -183,13 +181,13 @@ a,
 
 .btn.btn-g {
 	background: #e5e5e5;
-	color: #111;
+	color: #3b3d43;
 }
 
 .btn.btn-g:hover,
 .btn.btn-g:focus {
 	background: #d8d8d8;
-	color: #111;
+	color: #3b3d43;
 }
 
 .btn.btn-border-w {
@@ -202,7 +200,7 @@ a,
 .btn.btn-border-w:focus {
 	background: #fff;
 	border-color: transparent;
-	color: #111;
+	color: #3b3d43;
 }
 
 .btn.btn-d {
@@ -228,7 +226,7 @@ a,
 .btn-border-d {
 	background: transparent;
 	border: 1px solid rgba(17, 17, 17, 1);
-	color: #111;
+	color: #3b3d43;
 }
 
 .btn.btn-border-d:hover,
@@ -244,7 +242,7 @@ a,
 }
 .btn.btn-font-w:hover {
 	background: #fff;
-	color: #111;
+	color: #3b3d43;
 }
 
 /* Buttons size */
@@ -276,7 +274,7 @@ a,
 }
 
 .progress-bar.pb-dark {
-	background: #111;
+	background: #3b3d43;
 }
 
 .progress-bar span {
@@ -287,7 +285,7 @@ a,
 	opacity: 0;
 	line-height: 12px;
 	font-size: 12px;
-	color: #111;
+	color: #3b3d43;
 	padding: 4px 0px;
 }
 
@@ -459,7 +457,7 @@ a,
 }
 
 .bg-dark {
-	background: #111;
+	background: #3b3d43;
 }
 
 .bg-dark-30:before {
@@ -526,22 +524,68 @@ Preloader
 }
 
 .loader {
-	background-image: url(../images/logo/loaderlogo.svg);
 	position: absolute;
-	height: 92px;
-	width: 92px;
+	border-left: 2px solid #ffffff;
+	border-top: 2px solid rgba(255, 255, 255, 0.2);
+	border-right: 2px solid rgba(255, 255, 255, 0.2);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+	height: 46px;
+	width: 46px;
 	left: 50%;
 	top: 50%;
-	margin: -46px 0 0 -46px;
+	margin: -23px 0 0 -23px;
 	text-indent: -9999em;
+	font-size: 10px;
 	z-index: 9999;
+	-webkit-animation: load 0.8s infinite linear;
+	   -moz-animation: load 0.8s infinite linear;
+	     ms-animation: load 0.8s infinite linear;
+	      o-animation: load 0.8s infinite linear;
+	        animation: load 0.8s infinite linear;
+}
+
+.loader,
+.loader:after {
+	border-radius: 50%;
+	width: 46px;
+	height: 46px;
+}
+
+@-webkit-keyframes load {
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform:rotate(0deg);
+		-ms-transform:rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		-moz-transform:rotate(360deg);
+		-ms-transform:rotate(0deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes load {
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform:rotate(0deg);
+		-ms-transform:rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		-moz-transform:rotate(360deg);
+		-ms-transform:rotate(0deg);
+		transform: rotate(360deg);
+	}
 }
 
 /* ------------------------------------------------------------------
 Typography
 ------------------------------------------------------------------- */
 a {
-	color: #111;
+	color: #3b3d43;
 }
 
 a:hover, a:focus {
@@ -833,14 +877,14 @@ Sections
 	text-align: center;
 	font-weight: 800;
 	font-size: 30px;
-	color: #111;
+	color: #3b3d43;
 	margin: 0 0 70px;
 }
 
 .module-subtitle {
 	text-align: center;
 	font-size: 16px;
-	color: #111;
+	color: #3b3d43;
 	margin-bottom: 70px;
 }
 
@@ -863,7 +907,7 @@ Sections
 	display: table-cell;
 	white-space: pre;
 	padding: 0 8px;
-	color: #111;
+	color: #3b3d43;
 }
 
 .holder-w {
@@ -1104,6 +1148,10 @@ Portfolio
 
 #load-more {
   cursor: pointer;
+}
+
+#load-more img {
+  width:40px;
 }
 
 /* -------------------------------------------------------------------
@@ -1625,6 +1673,7 @@ Vertival margin, padding
 .pt-70  {padding-top:70px!important}
 .pt-80  {padding-top:80px!important}
 .pt-100 {padding-top:100px!important}
+.pt-120 {padding-top:120px!important}
 .pt-140 {padding-top:140px!important}
 
 .pb-0   {padding-bottom:0!important}

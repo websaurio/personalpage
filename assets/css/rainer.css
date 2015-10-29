@@ -4,15 +4,6 @@ Version: 1.0
 ------------------------------------------------------------------ */
 /* Fonts 
 ---------------------------------------------------- */
-
-@font-face {
-    font-family: 'Mono Social Icons Font';
-    src: url('../fonts/MonoSocialIconsFont-1.10.eot');
-    src: url('../fonts/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'), url('../fonts/MonoSocialIconsFont-1.10.woff') format('woff'), url('../fonts/MonoSocialIconsFont-1.10.ttf') format('truetype'), url('../fonts/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
-    src: url('../fonts/MonoSocialIconsFont-1.10.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
 @font-face {
     font-family: 'uni_sansbook';
     src: url('../fonts/Book/uni_sans_book-webfont.eot');
@@ -20,10 +11,19 @@ Version: 1.0
     font-weight: 400;
     font-style: normal
 }
+
 @font-face {
     font-family: 'uni_sansbold';
     src: url('../fonts/Bold/uni_sans_bold-webfont.eot');
     src: url('../fonts/Bold/uni_sans_bold-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/Bold/uni_sans_bold-webfont.woff') format("woff"), url('../fonts/Book/uni_sans_bold-webfont.ttf') format("truetype"), url('../fonts/Book/uni_sans_bold-webfont.svg#uni_sansbold') format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'haveheart';
+    src: url('../fonts/haveheart/HaveHeartOne.eot');
+    src: url('../fonts/haveheart/HaveHeartOne.eot?#iefix') format("embedded-opentype"), url('../fonts/haveheart/HaveHeartOne.woff') format("woff"), url('../fonts/haveheart/HaveHeartOne.ttf') format("truetype"), url('../fonts/haveheart/HaveHeartOne.svg#uni_sansbold') format("svg");
     font-weight: 400;
     font-style: normal
 }
@@ -37,38 +37,15 @@ h3 {
     letter-spacing: 2px;
 }
 
-/* Mono Social Font
----------------------------------------------------- */
-
-.symbol,
-a.symbol:before {
-    font-family: 'Mono Social Icons Font'!important;
-    -webkit-text-rendering: optimizeLegibility;
-    -moz-text-rendering: optimizeLegibility;
-    -ms-text-rendering: optimizeLegibility;
-    -o-text-rendering: optimizeLegibility;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    -ms-font-smoothing: antialiased;
-    -o-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    text-transform: none!important;
-}
-a.symbol:before {
-    content: attr(title)!important;
-    font-size: 60px;
-    line-height: 100px;
-    color: #fff;
-}
 
 /* Handwritten font 
 ---------------------------------------------------- */
 
 .handwritten, .handwritten h1{
-    font-family: 'Sacramento', cursive;
-    letter-spacing: 0px!important;
+    font-family: 'haveheart';
+    letter-spacing: 1px!important;
     font-weight: 400;
+	color:#3b3d43;
 }
 
 /* Nav
@@ -84,9 +61,10 @@ ul.nav.navbar-nav {
     padding-bottom: 0px;
 }
 li.active a {
-    color: #73CFAE!important;
-	font-weight: bold;
+    color: #4DAB8B!important;
 }
+
+.current {background: #73CFAE!important; color:#fff!important;}
 
 .navbar-collapse {
 	padding-bottom: 10px;
@@ -380,7 +358,9 @@ vertical-align: middle;
     padding-top: 10px;
 }
 
-.alt-features-item {padding: 0 40px;}
+.alt-features-item {
+	padding: 0 40px;
+}
 
 
 .st0 {
@@ -400,7 +380,8 @@ vertical-align: middle;
 ---------------------------------------------------- */
 #projectcluster {width: 100%; max-width: 1400px;}
 
-.work-item h3 {font-weight: bold;}
+.work-item h3 {font-weight: bold; color:#3b3d43;}
+
 .work-item p {margin-bottom: 10px;}
 
 .project img {
@@ -423,7 +404,11 @@ max-height: 50px; padding-top: 20px;}
 .filters li a:focus {
     color: #4DAB8B!important;
     font-weight: bold;
+	transition: 0.5s;
 }
+
+.filters li a {transition: 0.5s;}
+
 .work-item {
     padding-bottom: 50px!important;
 }
@@ -436,6 +421,11 @@ max-height: 50px; padding-top: 20px;}
 }
 .client {
     font-size: 12px;
+}
+
+#collagewrapper {
+    background-image: url(../images/clients/collage2.jpg);
+    background-size: contain;
 }
 
 /* Award Section
@@ -541,6 +531,11 @@ max-height: 50px; padding-top: 20px;}
         color: #fff;
         padding: 5px 10px;
     }
+	
+	.alt-features-item {
+	padding: 0 150px;
+}
+
 }
 /* Starting after XS - Defining Small
 ---------------------------------------------------- */
@@ -573,7 +568,13 @@ max-height: 50px; padding-top: 20px;}
         width: 100%;
     }
 	
-	.work-item p, .work-item h3 {padding: 0 25px;}
+	.work-item p, .work-item h3 {
+		padding: 0 25px;
+	}
+	.alt-features-item {
+		padding: 0 40px;
+	}
+
 }
 
 /* Inside Small
@@ -615,20 +616,28 @@ max-height: 50px; padding-top: 20px;}
     width: 100%;
     z-index: 90;
 }
+	
+	.alt-features-item {
+	padding: 0px;
+}
+
 }
 /* Starting after Medium - Defining Large
 ---------------------------------------------------- */
+@media (min-width: 1200px) {
+.alt-features-item {
+	padding: 0 40px;
+}
+}
 
-@media (min-width: 1200px) {}
 /* Starting after Large - Defining XLarge
 ---------------------------------------------------- */
+@media (min-width: 1441px) {}
+	
+/* Starting after XLarge Defining XXLarge
+---------------------------------------------------- */
+@media (min-width: 1600px) {}
 
-@media (min-width: 1441px) {
-    /* Starting after XLarge Defining XXLarge
+/* Starting after XLarge Defining 3XXLarge
 ---------------------------------------------------- */
-    
-    @media (min-width: 1600px) {}
-    /* Starting after XLarge Defining 3XXLarge
----------------------------------------------------- */
-    
-    @media (min-width: 2000px) {}
+@media (min-width: 2000px) {}

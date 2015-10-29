@@ -5,12 +5,11 @@
 	/* ---------------------------------------------- */
 
 	$(window).load(function() {
-		$('.loader').fadeOut();
-		$('.page-loader').delay(0).fadeOut('slow');
+		$('.page-loader').fadeOut('slow');
 	});
 
+	
 	$(document).ready(function() {
-
 
 		/* ---------------------------------------------- /*
 		 * Initialization General Scripts for all pages
