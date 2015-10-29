@@ -8,7 +8,7 @@
 		$('.page-loader').fadeOut('slow');
 	});
 
-	
+
 	$(document).ready(function() {
 
 		/* ---------------------------------------------- /*
@@ -279,7 +279,7 @@
         .addClass('work-item-hidden');
 
 			applyFilter(children.length);
-
+      layoutComplete();
 			return false;
 		});
 
