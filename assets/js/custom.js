@@ -1,10 +1,12 @@
 (function($){
+  // Caching
+  var win = $(window), doc = $(document);
 
 	/* ---------------------------------------------- /*
 	 * Preloader
 	/* ---------------------------------------------- */
 
-	$(window).load(function() {
+	win.load(function() {
     /* ---------------------------------------------- /*
      * WOW Animation When You Scroll
     /* ---------------------------------------------- */
@@ -18,7 +20,7 @@
 	});
 
 
-	$(document).ready(function() {
+	doc.ready(function() {
 
 		/* ---------------------------------------------- /*
 		 * Initialization General Scripts for all pages
@@ -28,7 +30,7 @@
 			navbar      = $('.navbar-custom'),
 			navHeight   = navbar.height(),
 			worksgrid   = $('#works-grid'),
-			width       = Math.max($(window).width(), window.innerWidth),
+			width       = Math.max(win.width(), window.innerWidth),
 			mobileTest;
 
 		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -38,14 +40,14 @@
 		buildHomeSection(homeSection);
 		navbarAnimation(navbar, homeSection, navHeight);
 
-		$(window).resize(function() {
-			var width = Math.max($(window).width(), window.innerWidth);
+		win.resize(function() {
+			var width = Math.max(win.width(), window.innerWidth);
 			buildHomeSection(homeSection);
 		});
 
-		$(window).scroll(function() {
+		win.scroll(function() {
 			effectsHomeSection(homeSection, this);
-			navbarAnimation(navbar, homeSection, navHeight);
+			navbarAnimation();
 		});
 
 		/* ---------------------------------------------- /*
@@ -57,9 +59,9 @@
 
 			if (homeSection.length > 0) {
 				if (homeSection.hasClass('home-full-height')) {
-					homeSection.height($(window).height());
+					homeSection.height(win.height());
 				} else {
-					homeSection.height($(window).height() * 0.95);
+					homeSection.height(win.height() * 0.95);
 				}
 			}
 	     	}
@@ -77,7 +79,7 @@
 				if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 				if (homeSection.length > 0) {
 					var homeSHeight = homeSection.height();
-					var topScroll = $(document).scrollTop();
+					var topScroll = doc.scrollTop();
 					if ((homeSection.hasClass('home-parallax')) && ($(scrollTopp).scrollTop() <= homeSHeight)) {
 						homeSection.css('top', (topScroll * 0));
 					}
@@ -85,7 +87,7 @@
 
 				if (homeSection.length > 0) {
 					var homeSHeight = homeSection.height();
-					var topScroll = $(document).scrollTop();
+					var topScroll = doc.scrollTop();
 					if ((homeSection.hasClass('home-parallax')) && ($(scrollTopp).scrollTop() <= homeSHeight)) {
 						homeSection.css('top', (topScroll * 0.35));
 					}
@@ -105,17 +107,22 @@
 		});
 		}
 		};
+
 		/* ---------------------------------------------- /*
 		 * Transparent navbar animation
 		/* ---------------------------------------------- */
 
-		function navbarAnimation(navbar, homeSection, navHeight) {
-			var topScroll = $(window).scrollTop();
+    // classAdded to avoid using navbar.hasClass('navbar-transparent')
+    var classAdded = false;
+
+		function navbarAnimation() {
 			if (navbar.length > 0 && homeSection.length > 0) {
-				if(topScroll >= navHeight) {
-					navbar.removeClass('navbar-transparent');
-				} else {
-					navbar.addClass('navbar-transparent');
+				if(classAdded && win.scrollTop() >= navHeight) {
+					navbar.removeClass('navbar-transparent').animate({ paddingTop: '0px', paddingBottom: '0px' }, "linear");
+          classAdded = false;
+				} else if(!classAdded && win.scrollTop() < navHeight) {
+          classAdded = true;
+					navbar.addClass('navbar-transparent').animate({ paddingTop: '15px', paddingBottom: '15px' }, "linear");
 				}
 			}
 		}
@@ -124,7 +131,7 @@
 		 * Navbar collapse on click
 		/* ---------------------------------------------- */
 
-		$(document).on('click','.navbar-collapse.in',function(e) {
+		doc.on('click','.navbar-collapse.in',function(e) {
 			if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
 				$(this).collapse('hide');
 			}
